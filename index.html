@@ -848,7 +848,7 @@
     // ===== 音声再生 =====
     const AUDIO_BASE_URL = "https://raw.githubusercontent.com/mnhyq295-dev/April_assignment/main/assets/audio/";
     // 音声ファイルがあるカテゴリー
-    const AUDIO_CATEGORIES = ['it'];
+    const AUDIO_CATEGORIES = ['management', 'marketing', 'hr', 'it', 'others'];
 
     let currentAudio = null;
 
@@ -931,7 +931,14 @@
         const card = filteredCards[currentIndex];
         const isZunda = document.body.classList.contains('zunda-mode');
         const hasAudio = !!getAudioUrl(card);
-        speakerBtn.style.visibility = (isZunda && hasAudio) ? 'visible' : 'hidden';
+        if (!isZunda) {
+            speakerBtn.style.visibility = 'hidden';
+            return;
+        }
+        speakerBtn.style.visibility = 'visible';
+        speakerBtn.style.opacity = hasAudio ? '1' : '0.3';
+        speakerBtn.style.cursor = hasAudio ? 'pointer' : 'default';
+        speakerBtn.disabled = !hasAudio;
     }
 
 
